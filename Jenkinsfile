@@ -21,5 +21,12 @@ pipeline
            }
         }
       }
+    stage ('code deploy')
+    {
+      steps
+      {
+        deploy adapters: [tomcat8(credentialsId: '27078fab-846f-47bf-9b40-b98b72f6264d', path: '', url: 'http://18.223.16.123:8080')], contextPath: null, onFailure: false, war: '**/*.war'
+      }
+    }  
     }
   }
