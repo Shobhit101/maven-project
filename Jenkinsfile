@@ -9,7 +9,7 @@ pipeline
       {
           git 'https://github.com/Shobhit101/maven-project'
       }
-     }
+    }
   {
       stage ('code install')
       {
@@ -25,8 +25,10 @@ pipeline
     {
       steps
       {
-        deploy adapters: [tomcat8(credentialsId: '27078fab-846f-47bf-9b40-b98b72f6264d', path: '', url: 'http://18.223.16.123:8080')], contextPath: null, onFailure: false, war: '**/*.war'
-      }
-    }  
+          sshagent(['172.31.32.252']) {
+			sh 'scp -o StrictHostKeyChecking=no **/*.war ec2-user@172.31.32.252:/var/lib/tomcat/webapps'
+		}
+      }	  
     }
   }
+}
