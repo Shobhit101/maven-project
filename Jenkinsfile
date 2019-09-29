@@ -11,13 +11,13 @@ pipeline
       }
      }
   {
-      stage ('code test')
+      stage ('code install')
       {
         steps
         {
           withMaven(maven: 'LocalMaven')
           {
-              sh 'mvn test'
+              sh 'mvn install'
            }
         }
       }
