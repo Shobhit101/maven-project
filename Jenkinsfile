@@ -4,14 +4,13 @@ pipeline
   
     stages 
     {
-      {
+      
       stage ('scm checkout')
-        steps
-        {
       {
           git 'https://github.com/Shobhit101/maven-project'
       }
-        }
+     }
+  {
       stage ('code test')
       {
         steps
