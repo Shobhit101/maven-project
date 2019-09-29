@@ -11,9 +11,11 @@ git 'https://github.com/Shobhit101/maven-project.git'
 }
 
 stage ('code test') {
+  steps{
 withMaven(maven: 'LocalMaven') {
     sh 'mvn test'
 }
+  }
 }
 }
 }
