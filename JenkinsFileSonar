@@ -37,24 +37,12 @@ pipeline
 			{
 				steps
 				{
+				withSonarQubeEnv('sonar')
+					{
 					withMaven(maven:'LocalMaven')
 					{
-						sh 'mvn package'
+						sh 'mvn package sonar:sonar'
 					}
-				}
-			}
-		}
-		{
-			stage ('Install Stage with Sonar')
-			{
-				steps
-				{
-					withSonarQubeEnv(sonar)
-					{
-						withMaven(maven:'LocalMaven')
-						{
-							sh 'mvn install sonar:sonar'
-						}
 					}
 				}
 			}
