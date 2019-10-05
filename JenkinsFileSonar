@@ -1,0 +1,78 @@
+pipeline
+{
+	agent any
+	{
+		stages
+		{
+			stage ('SCM Checkout')
+			{
+				git 'https://github.com/Shobhit101/maven-project'
+			}
+		}
+		{
+			stage ('Compile Stage')
+			{
+				steps
+				{
+					withMaven(maven:'LocalMaven')
+					{
+						sh 'mvn clean compile'
+					}
+				}
+			}
+		}
+		{
+			stage ('Test Stage')
+			{
+				steps
+				{
+					withMaven(maven:'LocalMaven')
+					{
+						sh 'mvn test'
+					}
+				}
+			}
+		}
+		{
+			stage ('Package Stage')
+			{
+				steps
+				{
+					withMaven(maven:'LocalMaven')
+					{
+						sh 'mvn package'
+					}
+				}
+			}
+		}
+		{
+			stage ('Install Stage with Sonar')
+			{
+				steps
+				{
+					withSonarQubeEnv('sonar')
+					{
+						withMaven(maven:'LocalMaven')
+						{
+							sh 'mvn install sonar:sonar'
+						}
+					}
+				}
+			}
+		}
+		{
+			stage ('Deploy the code')
+			{
+				steps
+				{
+					sshagent(['172.31.32.252'])
+					{
+						sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.32.252:/var/lib/tomcat/webapps'
+					}
+				}
+			}
+		}
+
+    }
+}
+    
