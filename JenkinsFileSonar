@@ -59,7 +59,7 @@ pipeline
 				}
 			}
 		}
-		{
+	/*	{
 			stage ('Deploy the code')
 			{
 				steps
@@ -70,5 +70,5 @@ pipeline
 					}
 				}
 			}
-		}
+		} */
 }
