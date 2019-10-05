@@ -7,8 +7,6 @@ pipeline
 				git 'https://github.com/Shobhit101/maven-project'
 			}
 		}
-    agent any
-
 		{
 			stage ('Compile Stage')
 			{
@@ -72,6 +70,4 @@ pipeline
 				}
 			}
 		}
-	
-    
 }
