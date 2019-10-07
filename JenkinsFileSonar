@@ -9,7 +9,7 @@ pipeline
 			}
 		}
 		{
-		    agent label 'pipeline'
+		    agent label 'make2'
 			stage ('Compile Stage')
 			{
 				steps
