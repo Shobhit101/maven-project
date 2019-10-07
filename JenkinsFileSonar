@@ -9,6 +9,7 @@ pipeline
 			}
 		}
 		{
+		    agent label 'pipeline'
 			stage ('Compile Stage')
 			{
 				steps
